@@ -1,0 +1,118 @@
+---
+title: "Quarto プレゼンテーション"
+subtitle: "revealjs によるスライド作成サンプル"
+author: "Quarto サンプル"
+institute: "サンプル研究室"
+date: today
+format:
+  revealjs:
+    theme: simple      # white / dark / serif / solarized なども選択可
+    slide-number: true
+    incremental: false # true にすると箇条書きを既定で段階表示
+    toc: false
+# PDF(Beamer) で出力したい場合は次を使う:
+# format: beamer
+---
+
+<!--
+LaTeX の Beamer に相当するスライド作成機能。
+Quarto では見出し(##) がスライドの区切りになります。
+既定の revealjs は HTML スライド、beamer 形式なら PDF スライドになります。
+-->
+
+# Quarto の基本
+
+## Quarto スライドとは
+
+- Markdown でプレゼンテーションを作成
+- 既定の revealjs は HTML（ブラウザで表示・アニメーション）
+- `format: beamer` で PDF スライドも生成可能
+- 数式・図・コード実行結果をそのまま掲載できる
+
+## スライドの構造
+
+- `#` は節（セクション）の区切りスライド
+- `##` が個々のスライドの見出し
+- 水平線 `---` でも区切れる
+
+::: {.callout-note}
+revealjs では callout（注釈ブロック）がそのまま使えます。
+:::
+
+# オーバーレイ（段階表示）
+
+## 段階表示（incremental）
+
+::: {.incremental}
+- 最初に表示
+- 次に表示
+- 最後に表示
+:::
+
+`::: {.incremental}` で囲むと、箇条書きが1つずつ表示されます。
+（Beamer の `\pause` に相当）
+
+## フラグメント
+
+::: {.fragment}
+この行はクリックで出現します。
+:::
+
+::: {.fragment .fade-in}
+こちらはフェードインします。
+:::
+
+# 数式・図・コード
+
+## 数式
+
+インライン数式: $E = mc^2$
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2}\, dx = \sqrt{\pi}
+$$
+
+## 図（Mermaid）
+
+```{mermaid}
+flowchart LR
+    A[入力] --> B[処理] --> C[出力]
+```
+
+# レイアウト
+
+## 2カラムレイアウト
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**左カラム**
+
+- 項目1
+- 項目2
+- 項目3
+:::
+
+::: {.column width="50%"}
+**右カラム**
+
+```{mermaid}
+flowchart TD
+    X --> Y
+```
+:::
+
+::::
+
+## まとめ
+
+::: {.callout-tip}
+## revealjs の主な機能
+
+- テーマで外観を変更（`theme:`）
+- `.incremental` / `.fragment` で段階表示
+- 数式・Mermaid・コード実行結果を掲載
+- `.columns` で多カラムレイアウト
+:::
+
+ご清聴ありがとうございました

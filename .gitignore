@@ -1,0 +1,30 @@
+# Quarto のレンダリング生成物
+**/.venv/
+**/venv/
+**/.env/
+**/env/
+
+# Quarto のレンダリング生成物
+/.quarto/
+**/.quarto/
+
+# 出力ファイル
+*.html
+*.pdf
+*.docx
+*.epub
+
+# 付随する生成リソース
+*_files/
+*_cache/
+/_book/
+**/_book/
+/_site/
+**/_site/
+
+# 補助ファイル
+.Rproj.user/
+.Rhistory
+.RData
+
+/**/*.quarto_ipynb*

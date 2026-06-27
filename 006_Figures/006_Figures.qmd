@@ -1,0 +1,62 @@
+---
+title: "図のサンプル"
+author: "Quarto サンプル"
+date: today
+format: html
+---
+
+<!--
+Markdown の画像記法 ![キャプション](パス) で図を挿入します。
+幅などの属性は {width=...} で指定し、相互参照ラベルは {#fig-...} で付けます。
+-->
+
+# 外部画像の挿入
+
+`![キャプション](sample.png)` で画像ファイルを挿入します。
+
+![サンプル画像](sample.png){#fig-sample width=50%}
+
+@fig-sample はサンプル画像です。
+
+# サイズ指定
+
+画像の属性で大きさを制御します:
+
+- `{width=50%}` --- ページ幅の 50%
+- `{width=8cm}` --- 絶対指定
+- `{height=3cm}`
+- `{fig-align="center"}` --- 配置（left / center / right）
+
+![中央寄せ・幅 30%](sample.png){width=30% fig-align="center"}
+
+# 複数図の横並び（subfigure 相当）
+
+`::: {#fig-...}` の図パネルで複数の図を並べ、それぞれにサブキャプションを付けます。
+
+::: {#fig-panel layout-ncol=2}
+
+![図 (a)](sample.png){#fig-a width=80%}
+
+![図 (b)](sample.png){#fig-b width=80%}
+
+2つの図を並列表示
+:::
+
+@fig-a は左、@fig-b は右です（パネル全体は @fig-panel）。
+
+# コードで生成する図（Quarto 独自）
+
+実行可能コードブロックの出力をそのまま図にできます。
+（実行には Python など計算エンジンが必要です。詳細は 201_CodeExecution を参照）
+
+```{python}
+#| label: fig-plot
+#| fig-cap: "コードで生成したグラフ"
+#| eval: false
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.linspace(0, 2 * np.pi, 100)
+plt.plot(x, np.sin(x))
+plt.title("sin(x)")
+plt.show()
+```

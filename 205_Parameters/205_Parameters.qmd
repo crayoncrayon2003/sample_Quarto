@@ -1,0 +1,94 @@
+---
+title: "パラメータ化文書（Quarto 独自）"
+author: "Quarto サンプル"
+date: today
+format: html
+# パラメータの宣言方法はエンジンで異なる:
+#   - jupyter: `parameters` タグを付けたセルで定義（このサンプルの方式）
+#   - knitr  : YAML の `params:` で定義（後述）
+engine: jupyter
+---
+
+<!--
+パラメータ化文書: 同じテンプレートに異なる値を渡して、複数のレポートを
+量産できる Quarto 独自機能。LaTeX にはない仕組みです。
+
+レンダリング例（パラメータを上書き）:
+  quarto render 205_Parameters.qmd -P region:大阪 -P year:2025
+  quarto render 205_Parameters.qmd --execute-params params.yml
+
+実行には venv 等の jupyter エンジンが必要です（README のインストール手順参照）。
+-->
+
+# パラメータとは
+
+パラメータの既定値をコード内で宣言し、レンダリング時にコマンドラインや
+パラメータファイルで上書きできます。地域別・期間別レポートの量産に便利です。
+
+# パラメータの宣言（jupyter）
+
+jupyter エンジンでは、**`parameters` タグを付けたセル**に既定値を書きます。
+`-P` で上書きすると、Quarto がこのセルの直後に上書き値を注入します。
+
+```{python}
+#| tags: [parameters]
+region = "東京"
+year = 2024
+threshold = 100
+```
+
+# パラメータの参照
+
+宣言した変数は通常の Python 変数として参照できます。
+
+```{python}
+print(f"{year}年 {region} のレポート（閾値: {threshold}）")
+```
+
+# 上書きの方法
+
+| 方法                       | 例                                             |
+|:---------------------------|:-----------------------------------------------|
+| コマンドラインで個別指定   | `quarto render doc.qmd -P region:大阪`         |
+| パラメータファイル         | `quarto render doc.qmd --execute-params p.yml` |
+
+`p.yml` の例:
+
+``` yaml
+region: 大阪
+year: 2025
+threshold: 150
+```
+
+# 活用例: レポートの量産
+
+シェルでループを回せば、地域ごとのレポートを一括生成できます:
+
+``` bash
+for r in 東京 大阪 名古屋; do
+  quarto render 205_Parameters.qmd -P region:$r --output report_$r.html
+done
+```
+
+# 参考: knitr（R）エンジンの場合
+
+R を使う場合は、宣言方法が異なり **YAML の `params:`** で定義します
+（タグ付きセルは使いません）。本文では `params$region` のように参照します。
+
+``` yaml
+---
+params:
+  region: "東京"
+  year: 2024
+---
+```
+
+``` r
+# knitr エンジンでの参照例（このファイルでは実行されません）
+cat(sprintf("%d年 %s のレポート", params$year, params$region))
+```
+
+::: {.callout-tip}
+パラメータ化は「同じ分析を異なるデータ・条件で繰り返す」業務レポートで
+特に威力を発揮します。
+:::

@@ -1,0 +1,95 @@
+---
+title: "数式のサンプル"
+author: "Quarto サンプル"
+date: today
+format: html
+---
+
+<!--
+Quarto では LaTeX 記法の数式をそのまま書けます。
+HTML 出力では MathJax、PDF 出力では LaTeX エンジンで組版されます。
+インライン: $ ... $ / ディスプレイ: $$ ... $$
+-->
+
+# インライン数式
+
+文中に数式を入れる場合は `$E = mc^2$` のように $E = mc^2$ ドル記号で囲みます:
+$a^2 + b^2 = c^2$
+
+# ディスプレイ数式
+
+独立した行に表示するには `$$ ... $$` を使います:
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
+$$
+
+番号付き・相互参照付きの数式には `{#eq-...}` ラベルを付けます:
+
+$$
+\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+$$ {#eq-basel}
+
+@eq-basel はバーゼル問題の解です。
+
+# 分数・指数・根号
+
+分数: $\dfrac{a+b}{c-d}$
+
+指数: $x^{2n}$、下付き: $a_{ij}$、組み合わせ: $x_i^2$
+
+平方根: $\sqrt{2}$、n乗根: $\sqrt[n]{x}$
+
+# ギリシャ文字
+
+小文字: $\alpha, \beta, \gamma, \delta, \epsilon, \theta, \lambda, \mu, \pi, \sigma, \phi, \omega$
+
+大文字: $\Gamma, \Delta, \Theta, \Lambda, \Pi, \Sigma, \Phi, \Omega$
+
+# 数学記号
+
+関係: $\leq,\ \geq,\ \neq,\ \approx,\ \equiv,\ \propto$
+
+集合: $\in,\ \notin,\ \subset,\ \subseteq,\ \cup,\ \cap,\ \emptyset$
+
+矢印: $\to,\ \Rightarrow,\ \Leftrightarrow,\ \infty$
+
+# 複数行の数式（align）
+
+`aligned` 環境で等号を揃えて整列できます:
+
+$$
+\begin{aligned}
+  (a + b)^2 &= a^2 + 2ab + b^2 \\
+  (a - b)^2 &= a^2 - 2ab + b^2 \\
+  (a + b)(a - b) &= a^2 - b^2
+\end{aligned}
+$$
+
+# 行列
+
+$$
+A = \begin{pmatrix}
+  a_{11} & a_{12} & a_{13} \\
+  a_{21} & a_{22} & a_{23} \\
+  a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+$$
+
+各括弧の種類: `pmatrix`（丸）、`bmatrix`（角）、`vmatrix`（縦棒）
+
+$$
+\det(A) = \begin{vmatrix}
+  a & b \\
+  c & d
+\end{vmatrix} = ad - bc
+$$
+
+# 場合分け
+
+$$
+|x| = \begin{cases}
+  x  & (x \geq 0) \\
+  -x & (x < 0)
+\end{cases}
+$$

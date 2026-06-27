@@ -1,0 +1,92 @@
+---
+title: "Tabset・レイアウト（Quarto 独自）"
+author: "Quarto サンプル"
+date: today
+format: html
+---
+
+<!--
+Tabset はタブ切り替え UI を作る Quarto 独自機能（HTML 出力）。
+レイアウト機能（カラム・パネル）と合わせて紹介します。
+-->
+
+# Tabset（タブ切り替え）
+
+`::: {.panel-tabset}` 内の各見出しがタブになります。
+
+::: {.panel-tabset}
+
+## Python
+
+``` python
+print("Hello from Python")
+```
+
+## R
+
+``` r
+print("Hello from R")
+```
+
+## Julia
+
+``` julia
+println("Hello from Julia")
+```
+
+:::
+
+# 多カラムレイアウト
+
+`::: {.columns}` で横並びにできます。
+
+:::: {.columns}
+
+::: {.column width="48%"}
+**左カラム**
+
+- 項目A
+- 項目B
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**右カラム**
+
+- 項目C
+- 項目D
+:::
+
+::::
+
+# 図・コンテンツのレイアウト
+
+`layout-ncol` で要素を格子状に並べられます。
+
+::: {layout-ncol=2}
+![図1](../006_Figures/sample.png){width=80%}
+
+![図2](../006_Figures/sample.png){width=80%}
+:::
+
+# マージン配置
+
+`.column-margin` でサイドノートを欄外に配置できます（HTML）。
+
+::: {.column-margin}
+これは欄外（マージン）に表示される補足です。
+:::
+
+本文はこのように続きます。マージン要素は本文の右側に配置されます。
+
+# 本文幅の制御
+
+- `.column-body`   : 標準の本文幅
+- `.column-page`   : ページ全幅まで拡張
+- `.column-screen` : 画面全幅
+
+::: {.column-page}
+このブロックは本文より広い「ページ幅」で表示されます（大きな表や図に便利）。
+:::

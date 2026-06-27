@@ -1,0 +1,72 @@
+---
+title: "複数の出力形式（Quarto 独自）"
+author: "Quarto サンプル"
+date: today
+# 1つのソースから複数形式を生成できる（Quarto の核心的特徴）。
+format:
+  html:
+    toc: true
+    code-fold: true
+  pdf:
+    documentclass: scrartcl
+    toc: true
+    # 日本語 PDF には LuaLaTeX などの設定が必要:
+    # pdf-engine: lualatex
+    # CJKmainfont: "Noto Serif CJK JP"
+  docx:
+    toc: true
+---
+
+<!--
+Quarto は同じ .qmd から HTML / PDF / Word / ePub / revealjs など
+多様な形式を生成できます。LaTeX が基本 PDF 専用なのに対し、
+Quarto は「ワンソース・マルチフォーマット」が特徴です。
+
+レンダリング例:
+  quarto render 204_OutputFormats.qmd              # 既定（最初の形式 html）
+  quarto render 204_OutputFormats.qmd --to pdf     # PDF（要 TeX）
+  quarto render 204_OutputFormats.qmd --to docx    # Word
+  quarto render 204_OutputFormats.qmd --to all     # 全形式
+-->
+
+# ワンソース・マルチフォーマット
+
+この文書の YAML には `html` / `pdf` / `docx` の3形式が定義されています。
+1つのソースから、目的に応じた形式を出力できます。
+
+# 主な出力形式
+
+| 形式       | キー         | 用途                       |
+|:-----------|:-------------|:---------------------------|
+| HTML       | `html`       | Web 公開・ノート           |
+| PDF        | `pdf`        | 印刷・論文（LaTeX 経由）    |
+| Word       | `docx`       | 共同編集・提出             |
+| revealjs   | `revealjs`   | スライド（010 参照）       |
+| ePub       | `epub`       | 電子書籍                   |
+| Markdown   | `gfm`        | GitHub 等                  |
+
+# 形式ごとの条件分岐
+
+特定の形式だけに内容を出すには `.content-visible` を使います。
+
+::: {.content-visible when-format="html"}
+この段落は **HTML 出力のときだけ** 表示されます。
+:::
+
+::: {.content-visible when-format="pdf"}
+この段落は **PDF 出力のときだけ** 表示されます。
+:::
+
+# 形式固有のオプション
+
+YAML で形式ごとに設定を分けられます。例:
+
+- HTML: `code-fold: true`（コードを折りたたみ表示）
+- PDF: `documentclass`, `pdf-engine`, フォント設定
+- Word: `reference-doc`（スタイルテンプレート）
+
+# 補足: PDF 出力について
+
+日本語 PDF を出力する場合は LuaLaTeX 等の設定が必要です。
+YAML の `pdf-engine: lualatex` と CJK フォント指定を有効にしてください
+（このサンプルではコメントで例示）。

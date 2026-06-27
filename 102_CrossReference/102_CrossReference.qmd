@@ -1,0 +1,84 @@
+---
+title: "相互参照のサンプル"
+author: "Quarto サンプル"
+date: today
+format:
+  html:
+    toc: true
+    number-sections: true
+crossref:
+  fig-title: 図       # 図のプレフィックス
+  tbl-title: 表       # 表のプレフィックス
+  eq-prefix: 式       # 数式参照のプレフィックス
+---
+
+<!--
+LaTeX の \label / \ref / \eqref / \autoref に相当します。
+Quarto では要素に {#接頭辞-名前} ラベルを付け、本文で @接頭辞-名前 で参照します。
+接頭辞は固定で意味を持ちます:
+  sec- 節 / fig- 図 / tbl- 表 / eq- 数式
+番号と種別名（「図1」「表2」など）は自動で付与されます。
+-->
+
+# 数式 {#sec-math}
+
+数式には `$$ ... $$ {#eq-...}` でラベルを付けます。
+
+$$
+e^{i\pi} + 1 = 0
+$$ {#eq-euler}
+
+$$
+\int_0^1 x^2 \, dx = \frac{1}{3}
+$$ {#eq-integral}
+
+# 図 {#sec-fig}
+
+図には `{#fig-...}` ラベルを付けます。
+
+![サンプルの三角形（Mermaid で作図）](){#fig-triangle}
+
+```{mermaid}
+%%| label: fig-shape
+%%| fig-cap: "Mermaid によるノード図"
+flowchart LR
+    A --> B --> C
+```
+
+# 表 {#sec-tab}
+
+| 項目 | 値 |
+|:-----|---:|
+| A    | 10 |
+| B    | 20 |
+
+: サンプルの表 {#tbl-sample}
+
+# 相互参照 {#sec-ref}
+
+上で定義したラベルをここでまとめて参照します。
+
+## 基本の参照（@ 記法）
+
+`@キー` と書くと、種別名と番号（例: 「図 1」）が自動で挿入されます。
+
+- 節参照: @sec-math
+- 数式参照: @eq-euler
+- 図参照: @fig-shape
+- 表参照: @tbl-sample
+
+## 数式の参照
+
+`@eq-...` は数式番号を括弧付きで参照します（LaTeX の `\eqref` に相当）。
+
+- @eq-euler はオイラーの等式
+- @eq-integral は定積分の例
+
+## 参照のカスタマイズ
+
+- 文頭で大文字種別にしたい場合: `@sec-math` → 「節 1」
+- 番号のみ参照したい場合: `[-@fig-shape]`
+- 複数参照: `[@eq-euler; @eq-integral]`
+
+例: 詳しくは @sec-math と @sec-fig を参照。
+数式は [-@eq-euler] 番。

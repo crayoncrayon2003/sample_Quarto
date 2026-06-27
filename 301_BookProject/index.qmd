@@ -1,0 +1,16 @@
+# はじめに {.unnumbered}
+
+これは Quarto の **book プロジェクト** のサンプルです。
+
+LaTeX で `\include` や `subfiles` を使って章を分割した文書を、
+Quarto ではプロジェクト（`_quarto.yml`）として体系的に管理できます。
+
+## book プロジェクトの利点
+
+- 章を別ファイルに分割し、`_quarto.yml` で章立てを宣言
+- 章をまたいだ相互参照（@sec- / @fig- など）が可能
+- 目次・章番号・ナビゲーションを自動生成
+- HTML（Web 書籍）と PDF を同一ソースから出力
+- `quarto render chapters/intro.qmd` で特定章だけのレンダリングも可能
+
+各章は `chapters/` に配置しています。

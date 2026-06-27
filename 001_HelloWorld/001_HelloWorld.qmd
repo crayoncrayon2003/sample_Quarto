@@ -1,0 +1,15 @@
+---
+title: "Hello World"
+format: html
+---
+
+# はじめに
+
+Hello, World! Hello, Quarto!!
+
+<!--
+レンダリング方法:
+  quarto render 001_HelloWorld.qmd          # 既定（html）で出力
+  quarto render 001_HelloWorld.qmd --to pdf # PDF で出力（TeX が必要）
+  quarto preview 001_HelloWorld.qmd         # ライブプレビュー
+-->

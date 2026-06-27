@@ -1,0 +1,53 @@
+---
+title: "カスタムコマンド・マクロのサンプル"
+author: "Quarto サンプル"
+date: today
+format: html
+# LaTeX 数式マクロを外部ファイルから読み込む（HTML/MathJax・PDF 両対応）
+include-in-header:
+  - _macros.tex
+---
+
+<!--
+Quarto に LaTeX の \newcommand そのものはありませんが、同等のことは
+いくつかの仕組みで実現できます:
+  1. 数式マクロ      … \newcommand を _macros.tex に書き include-in-header で読み込む
+  2. テキスト置換    … ショートコード {{< var ... >}} や Lua フィルタ
+  3. 再利用ブロック  … 後述の :::{#... } や include（103 を参照）
+-->
+
+# 数式マクロ（\newcommand 相当）
+
+`_macros.tex` に `\newcommand` を定義し、YAML の `include-in-header` で
+読み込んでいます。本文の数式中でそのまま使えます。
+
+実数集合 $\R$、自然数集合 $\N$（`\R`, `\N`）
+
+2引数マクロ `\myfrac{分子}{分母}`: $\myfrac{a+b}{c-d}$
+
+`\norm{x}` のような自作記法: $\norm{\mathbf{v}}$
+
+# 変数（ショートコード）
+
+`_variables.yml` に値を定義し、本文で `{{< var キー >}}` と書くと
+置換されます。LaTeX の引数なしコマンド（\myname 等）に相当します。
+
+例（このプロジェクトでは未定義なのでコメントで紹介）:
+
+```markdown
+著者名: {{< var author.name >}}
+製品名: {{< var product >}}
+```
+
+# テキストの強調マクロ
+
+Quarto には任意のテキストマクロ機能はありませんが、Pandoc 属性で
+クラスを付け、CSS でスタイルを当てることで同等の再利用ができます。
+
+[重要な箇所]{.highlight style="font-weight:bold; color:red;"}
+
+# その他の再利用手段
+
+- **include**: 共通部分を別ファイル化して `{{< include >}}` で読み込む（103 参照）
+- **Lua フィルタ**: 独自のショートコードやマクロを定義（高度な用途）
+- **_metadata.yml**: ディレクトリ単位で共通の YAML 設定を適用

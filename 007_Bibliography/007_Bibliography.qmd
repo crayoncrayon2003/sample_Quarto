@@ -1,0 +1,60 @@
+---
+title: "参考文献のサンプル"
+author: "Quarto サンプル"
+date: today
+format: html
+bibliography: references.bib
+# csl: ipsj.csl        # 引用スタイルを CSL ファイルで指定可能（任意）
+# link-citations: true # 引用から文献一覧へのリンクを張る
+---
+
+<!--
+Quarto では Pandoc の citeproc により参考文献を処理します。
+- references.bib に BibTeX 形式で文献を記述
+- 本文中で @キー または [@キー] と書いて引用
+- 文献一覧は末尾に自動生成される（# 参考文献 の位置に出力）
+LaTeX のような bibtex の多段コンパイルは不要です。
+-->
+
+# 文献の引用
+
+Quarto での参考文献管理の手順:
+
+1. `references.bib` に文献情報を記述する
+2. YAML の `bibliography:` でファイルを指定する
+3. 本文中で `@キー`（文中引用）または `[@キー]`（括弧引用）で引用する
+4. `quarto render` 一回で文献一覧まで生成される
+
+Knuth の組版に関する著作 [@knuth1984] は非常に重要です。
+また、Lamport による解説書 [@lamport1994] は入門書として広く読まれています。
+Goossens ら [@goossens1993] による参考書も有用です。
+
+複数の文献 [@knuth1984; @lamport1994] を同時に引用することもできます。
+
+# 引用コマンドの種類
+
+- `@knuth1984` --- 文中引用（著者と年）: @knuth1984
+- `[@lamport1994]` --- 括弧引用: [@lamport1994]
+- `[@lamport1994, p. 10]` --- ページ番号付き: [@lamport1994, p. 10]
+- `[-@knuth1984]` --- 年のみ抑制（著者名を出さない）: [-@knuth1984]
+
+本文で引用しない文献も一覧に載せたい場合は、YAML に `nocite` を指定します:
+
+```yaml
+nocite: |
+  @einstein1905, @sample2023
+```
+
+# 引用スタイル
+
+Quarto は CSL（Citation Style Language）で引用・文献スタイルを切り替えます。
+
+- YAML の `csl:` に `.csl` ファイルを指定
+- スタイル例: APA, IEEE, Chicago, ipsj（情報処理学会）など
+- CSL ファイルは <https://www.zotero.org/styles> から入手可能
+
+スタイル未指定時は Chicago author-date が既定です。
+
+# 参考文献
+
+<!-- ↑ この見出しの位置に文献一覧が自動挿入される -->

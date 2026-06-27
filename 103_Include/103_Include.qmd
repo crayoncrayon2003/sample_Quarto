@@ -1,0 +1,29 @@
+---
+title: "include によるファイル分割"
+author: "Quarto サンプル"
+date: today
+format:
+  html:
+    toc: true
+    number-sections: true
+---
+
+<!--
+LaTeX の \input / \include に相当する機能。
+Quarto では {{< include パス >}} ショートコードで他ファイルの内容を
+その場に展開します。読み込まれる側（chapters/*.qmd）には YAML フロント
+マターを書きません（メイン文書の設定が適用されます）。
+-->
+
+# include の基本
+
+`{{< include パス >}}` で別ファイルの内容を展開します。
+読み込まれるファイルは部分文書として扱われ、フロントマターを持ちません。
+
+以下に `chapters/` 内の3つのファイルを読み込みます。
+
+{{< include chapters/chap1.qmd >}}
+
+{{< include chapters/chap2.qmd >}}
+
+{{< include chapters/chap3.qmd >}}

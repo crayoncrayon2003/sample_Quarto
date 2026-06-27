@@ -1,0 +1,46 @@
+---
+title: "embed による部分文書の再利用"
+author: "Quarto サンプル"
+date: today
+format:
+  html:
+    toc: true
+    number-sections: true
+---
+
+<!--
+LaTeX の subfiles パッケージ（サブファイル単独でもコンパイル可能）に
+最も近い機能。Quarto の {{< embed >}} は、独立した別文書（.qmd / .ipynb）の
+出力を取り込みます。
+
+include（103）との違い:
+  - include: ソースをそのまま差し込む。部分ファイルは単独レンダリング不可
+  - embed  : 別文書を「単独でもレンダリングでき」、その出力を取り込む
+            → subfiles 的な使い方ができる
+-->
+
+# embed の特徴
+
+`sections/` 内の各ファイルは **単独でもレンダリング可能** な完全な文書
+（フロントマター付き）です。メイン文書からはその出力を `{{< embed >}}` で
+取り込みます。
+
+- 各サブ文書は `quarto render sections/sec_feature.qmd` で単体出力できる
+- メインからは `{{< embed sections/sec_feature.qmd >}}` で取り込む
+- セル単位で取り込む場合: `{{< embed sections/sec_feature.qmd#fig-xxx >}}`
+
+# サブ文書の取り込み
+
+{{< embed sections/sec_feature.qmd >}}
+
+{{< embed sections/sec_usage.qmd >}}
+
+# 3つの分割方法の比較
+
+| 方法                   | 単独レンダリング | 内容 / 出力 | 主な用途                 |
+|:-----------------------|:----------------:|:-----------:|:-------------------------|
+| `{{< include >}}`      | 不可             | ソース差込  | 文書断片の共通化         |
+| `{{< embed >}}`        | 可               | 出力取込    | 既存文書の成果物を再利用 |
+| book プロジェクト（301）| 章単位で可       | 章を統合    | 書籍・大規模文書         |
+
+: ファイル分割方法の比較 {#tbl-compare}

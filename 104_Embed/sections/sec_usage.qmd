@@ -1,0 +1,29 @@
+---
+# sections/sec_usage.qmd
+title: "embed の使い方"
+format: html
+---
+
+## embed の使い方
+
+### メイン文書の書き方
+
+メイン文書の本文中で `{{< embed sections/sec_usage.qmd >}}` のように
+取り込みたい文書のパスを指定します。
+
+### サブ文書の書き方
+
+サブ文書はフロントマター付きの通常の `.qmd` です。
+特別な宣言は不要で、単体でも次のようにレンダリングできます:
+
+``` bash
+quarto render sections/sec_usage.qmd
+```
+
+### 特定のセル・出力だけ取り込む
+
+ラベル付きの図・表・コード出力だけを取り込むこともできます:
+
+``` markdown
+{{< embed notebook.ipynb#fig-plot >}}
+```

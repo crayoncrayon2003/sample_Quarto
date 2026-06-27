@@ -1,0 +1,89 @@
+---
+title: "コード実行（Quarto 独自）"
+author: "Quarto サンプル"
+date: today
+format: html
+# {r} セルがあると knitr が選ばれ Python に reticulate が必要になるため、
+# Python(jupyter) を明示する。R の例は eval: false なので実行されない。
+engine: jupyter
+---
+
+<!--
+Quarto 最大の特徴: 文章中に実行可能コードを埋め込み、その結果（数値・表・
+図）を文書に反映できる（literate programming / 再現可能文書）。
+LaTeX にはない機能で、Python・R・Julia・Observable JS に対応します。
+
+このファイルを実行するには対応エンジンが必要です:
+  - Python: jupyter（pip install jupyter matplotlib pandas）
+  - R     : knitr（R パッケージ）
+ここではサンプルとして eval: false で雛形を示しています。
+-->
+
+# 実行可能コードブロック
+
+` ```{python} ` のように言語を波括弧で囲むと、レンダリング時に実行されます。
+
+```{python}
+#| eval: false
+x = 1 + 2
+print(f"1 + 2 = {x}")
+```
+
+# セルオプション（chunk options）
+
+セル先頭の `#|` 行で挙動を制御します。
+
+| オプション      | 意味                                       |
+|:----------------|:-------------------------------------------|
+| `echo: false`   | コードを隠し、結果だけ表示                  |
+| `eval: false`   | 実行せずコードだけ表示                      |
+| `output: false` | 実行するが結果を非表示                      |
+| `warning: false`| 警告を非表示                               |
+| `include: false`| 実行するが何も出力しない（副作用のみ）      |
+| `label: ...`    | 相互参照用のラベル（`fig-` / `tbl-` 接頭辞）|
+
+# 図の生成と相互参照
+
+```{python}
+#| label: fig-sine
+#| fig-cap: "コードで生成した正弦波"
+#| eval: false
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.linspace(0, 2*np.pi, 200)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+生成した図は @fig-sine のように参照できます。
+
+# インラインコード
+
+文章中に計算結果を埋め込めます（Python の場合）:
+
+``` markdown
+合計は `{python} 1 + 2` です。
+```
+
+# 表の生成
+
+```{python}
+#| label: tbl-data
+#| tbl-cap: "コードで生成した表"
+#| eval: false
+import pandas as pd
+pd.DataFrame({"名前": ["A", "B"], "値": [10, 20]})
+```
+
+# 他言語の例（R）
+
+```{r}
+#| eval: false
+summary(cars)
+plot(cars)
+```
+
+::: {.callout-note}
+`eval: false` を外し、対応する計算エンジンをインストールすれば、
+実際に計算・作図が実行され文書に反映されます。
+:::

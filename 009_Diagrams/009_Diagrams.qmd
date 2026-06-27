@@ -1,0 +1,75 @@
+---
+title: "図表・ダイアグラムのサンプル"
+author: "Quarto サンプル"
+date: today
+format: html
+---
+
+<!--
+LaTeX の TikZ に相当する「コードで図を描く」機能。
+Quarto は Mermaid と Graphviz(dot) をネイティブにサポートしており、
+追加ツールなしでフローチャートや関係図を描けます。
+TikZ そのものを使いたい場合は、PDF 出力時に LaTeX コードを埋め込みます。
+-->
+
+# Mermaid: フローチャート
+
+`{mermaid}` コードブロックで記述します（TikZ のフローチャートに相当）。
+
+```{mermaid}
+flowchart TD
+    start([開始]) --> proc1[処理 A]
+    proc1 --> cond{条件?}
+    cond -->|Yes| proc2[処理 B]
+    cond -->|No| proc3[処理 C]
+    proc2 --> stop([終了])
+    proc3 --> stop
+```
+
+# Mermaid: ノードと接続
+
+```{mermaid}
+flowchart LR
+    A[ノード A] --> B[ノード B]
+    A --> C[ノード C]
+    B --> C
+```
+
+# Mermaid: シーケンス図
+
+```{mermaid}
+sequenceDiagram
+    participant U as ユーザー
+    participant S as サーバー
+    U->>S: リクエスト
+    S-->>U: レスポンス
+```
+
+# Graphviz (DOT): 関係図
+
+```{dot}
+digraph G {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+    A -> B [label="接続1"];
+    A -> C [label="接続2"];
+    B -> C [label="接続3"];
+}
+```
+
+# TikZ を使う場合（PDF 出力）
+
+TikZ をそのまま使いたいときは、`format: pdf` で生 LaTeX を埋め込みます。
+HTML 出力では表示されないため、下記はコメントで例示します。
+
+````markdown
+```{=latex}
+\begin{tikzpicture}
+  \draw[thick, blue, fill=blue!20] (0,0) rectangle (3,2);
+  \draw[thick, red, fill=red!20] (1,0.5) circle (0.7);
+\end{tikzpicture}
+```
+````
+
+なお拡張機能 `quarto-ext/tikz` を使うと、TikZ を画像化して
+HTML にも埋め込めます。

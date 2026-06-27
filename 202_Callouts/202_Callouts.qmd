@@ -1,0 +1,70 @@
+---
+title: "Callout（注釈ブロック）"
+author: "Quarto サンプル"
+date: today
+format: html
+---
+
+<!--
+Callout は Quarto 独自の装飾ブロック。注意・ヒント・警告などを
+目立つボックスで表示します。LaTeX の tcolorbox や独自環境に相当します。
+構文: ::: {.callout-種類} ... :::
+種類: note / tip / warning / caution / important
+-->
+
+# 5種類の Callout
+
+::: {.callout-note}
+note: 補足・備考に使います。
+:::
+
+::: {.callout-tip}
+tip: ヒントやコツに使います。
+:::
+
+::: {.callout-warning}
+warning: 注意喚起に使います。
+:::
+
+::: {.callout-caution}
+caution: 慎重な対応が必要な事項に使います。
+:::
+
+::: {.callout-important}
+important: 特に重要な事項に使います。
+:::
+
+# タイトル付き Callout
+
+ブロック内の見出し（`##`）がタイトルになります。
+
+::: {.callout-tip}
+## インストールのヒント
+
+Quarto は <https://quarto.org/docs/get-started/> から入手できます。
+:::
+
+# 折りたたみ可能な Callout
+
+`collapse="true"` で初期状態を折りたたみにできます。
+
+::: {.callout-note collapse="true"}
+## クリックで開く詳細
+
+この内容は最初は折りたたまれています。
+長い補足情報を隠しておくのに便利です。
+:::
+
+# 外観の指定
+
+`appearance` で見た目を変えられます（`default` / `simple` / `minimal`）。
+
+::: {.callout-warning appearance="simple"}
+simple 表示は背景色を抑えた控えめなスタイルです。
+:::
+
+# アイコンの非表示
+
+::: {.callout-note icon="false"}
+`icon="false"` でアイコンを消せます。
+:::

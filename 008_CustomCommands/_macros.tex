@@ -1,0 +1,8 @@
+% LaTeX 数式マクロ定義
+% Quarto の include-in-header で読み込まれ、HTML(MathJax)・PDF 双方で有効になる。
+% 注意: MathJax で使うため、テキスト系コマンドではなく数式マクロを定義する。
+
+\newcommand{\R}{\mathbb{R}}            % 実数集合
+\newcommand{\N}{\mathbb{N}}            % 自然数集合
+\newcommand{\myfrac}[2]{\dfrac{#1}{#2}} % 2引数: 分数
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert} % ノルム

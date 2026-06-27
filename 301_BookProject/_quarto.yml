@@ -1,0 +1,36 @@
+# Quarto プロジェクト設定ファイル（Quarto 独自）
+# このディレクトリ全体を1つの「book プロジェクト」として扱う。
+# LaTeX の \include による章分割を、プロジェクトとして体系化したもの。
+#
+# レンダリング:
+#   cd 301_BookProject
+#   quarto render           # _book/ に書籍全体を出力
+#   quarto preview          # ライブプレビュー
+
+lang: ja
+
+project:
+  type: book
+
+book:
+  title: "Quarto サンプル書籍"
+  author: "Quarto サンプル"
+  date: today
+  chapters:
+    - index.qmd           # 序文（番号なし）
+    - chapters/intro.qmd
+    - chapters/methods.qmd
+    - chapters/conclusion.qmd
+  # appendices:           # 付録を分けたい場合
+  #   - chapters/appendix.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+    # 日本語 PDF には LuaLaTeX 等の設定が必要:
+    # pdf-engine: lualatex
+    # CJKmainfont: "Noto Serif CJK JP"

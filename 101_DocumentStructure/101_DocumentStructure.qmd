@@ -1,0 +1,58 @@
+---
+title: "ドキュメント構造のサンプル"
+author: "Quarto サンプル"
+date: today
+abstract: |
+  このドキュメントは、Quarto のドキュメント構造（見出し・目次・概要）を
+  示すサンプルです。abstract は YAML フロントマターに記述します。
+format:
+  html:
+    toc: true              # 目次を生成
+    toc-depth: 3           # 目次に含める見出しの深さ
+    toc-title: "目次"
+    number-sections: true  # 見出しに番号を付ける（\section 相当）
+---
+
+<!--
+LaTeX の \maketitle・\tableofcontents・abstract・\section 等に対応します。
+Quarto では Markdown の見出しレベル(#, ##, ###) が階層になり、
+タイトル・著者・概要・目次は YAML で制御します。
+-->
+
+# はじめに
+
+Quarto では `#`（節）から `###`（小節）まで Markdown の見出しで
+階層的な構造を作成できます。`number-sections: true` で自動採番されます。
+
+# 見出しの階層
+
+## subsection: 節
+
+`##` は section の下位レベルです。
+
+### subsubsection: 小節
+
+`###` はさらに下位レベルです。
+
+## 番号なし見出し {.unnumbered}
+
+見出しに `{.unnumbered}` を付けると番号が付きません。
+
+# 番号なし section {.unnumbered}
+
+この見出しには番号が付きません。目次から除外するには `{.unnumbered .unlisted}` を付けます。
+
+# 付録（Appendix）
+
+LaTeX の `\appendix` のように見出しを A, B … と自動採番する機能は、
+**book プロジェクトの `appendices:`**（301 参照）で提供されます。
+単一文書ではその自動レター採番はなく、通常の連番（この節なら 3.1, 3.2 …）に
+なります。ラベルを付ければ相互参照は可能です。
+
+## 補足事項 {#sec-appendix-a}
+
+`{#sec-...}` ラベルを付けると相互参照できます（102 を参照）。
+
+## 参考資料 {#sec-appendix-b}
+
+付録の2番目のセクションです。

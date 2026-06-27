@@ -1,0 +1,72 @@
+---
+title: "テキスト装飾のサンプル"
+author: "Quarto サンプル"
+date: today
+format: html
+---
+
+<!--
+Quarto は Pandoc Markdown を基盤としています。
+LaTeX の \textbf{...} などのコマンドは、Markdown の記法に置き換えます。
+色やサイズなど Markdown にない装飾は、HTML の <span> や CSS、
+あるいは Pandoc の属性付き span（[テキスト]{.class}）で表現します。
+-->
+
+# 基本装飾
+
+**太字 (bold)**
+
+*イタリック (italic)*
+
+[下線 (underline)]{.underline}
+
+***太字 + イタリック***
+
+~~取り消し線 (strikethrough)~~
+
+`等幅 (inline code)`
+
+上付き^2^ / 下付き~2~
+
+# フォントファミリー
+
+ローマン体（既定）
+
+[サンセリフ体 (sans-serif)]{style="font-family: sans-serif;"}
+
+`等幅フォント (monospace)`
+
+# フォントサイズ
+
+[とても小さい]{style="font-size: 0.7em;"}
+標準
+[大きい]{style="font-size: 1.5em;"}
+[とても大きい]{style="font-size: 2em;"}
+
+# テキストカラー
+
+[赤]{style="color: red;"}
+[青]{style="color: blue;"}
+[緑]{style="color: green;"}
+[オレンジ]{style="color: orange;"}
+[紫]{style="color: purple;"}
+
+RGB で任意の色: [カスタムカラー (teal)]{style="color: rgb(0,128,128);"}
+
+背景色: [背景色: 黄色]{style="background-color: yellow;"}
+
+[背景色: シアン + 白文字]{style="background-color: cyan; color: white;"}
+
+# 装飾の組み合わせ
+
+***太字 + イタリック***
+
+**[太字 + 赤]{style="color: red;"}**
+
+[**大きい + 太字 + 青**]{style="font-size: 1.5em; color: blue;"}
+
+# 補足
+
+Pandoc の `[テキスト]{属性}` 記法は、HTML 出力では `<span>`、
+PDF 出力では対応する LaTeX に変換されます。複雑な装飾は出力形式ごとに
+挙動が異なる点に注意してください。
