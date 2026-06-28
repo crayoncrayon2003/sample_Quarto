@@ -5,6 +5,9 @@
 dpkg --print-architecture
 ```
 
+Quartoに、TypstのCLI同梱が同法されている。
+
+
 ## 1.1. Install for amd64 
 ```bash
 VER=$(curl -s https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest | grep -Po '"tag_name": "v\K[^"]*')

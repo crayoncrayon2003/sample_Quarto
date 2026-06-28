@@ -1,0 +1,100 @@
+---
+title: "Typst による PDF 出力（Quarto 独自）"
+author: "Quarto サンプル"
+date: today
+format:
+  typst:
+    papersize: a4
+    margin:
+      x: 2cm
+      y: 2.5cm
+    toc: true
+    section-numbering: "1.1.1"
+    # 日本語フォントを使う場合（システムに入っているフォント名を指定）:
+    # mainfont: "Noto Serif CJK JP"
+---
+
+<!--
+Typst は LaTeX に代わる新しい組版システム。Quarto 1.4 以降は
+`format: typst` でネイティブ対応し、LaTeX(TeX 環境) を入れずに PDF を
+生成できます。コンパイルが高速で、日本語フォントの指定も容易です。
+
+レンダリング:
+  quarto render 206_Typst.qmd --to typst   # PDF を生成
+  quarto render 206_Typst.qmd --to typst --output-dir _out
+中間生成される .typ ファイルを見るには:
+  quarto render 206_Typst.qmd --to typst --no-clean
+-->
+
+# Typst とは
+
+Typst は Rust 製のモダンな組版システムです。Quarto から `format: typst` を
+指定すると、**TeX 環境なしで PDF** を生成できます。
+
+- LaTeX より**コンパイルが高速**
+- 日本語フォントの指定が容易（`mainfont` を指定するだけ）
+- Markdown の大半の要素（見出し・表・図・相互参照・数式）がそのまま使える
+
+# 共通要素はそのまま使える
+
+## 数式
+
+インライン数式 $E = mc^2$ もディスプレイ数式も LaTeX 記法で書けます:
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2}\, dx = \sqrt{\pi}
+$$ {#eq-gauss}
+
+@eq-gauss のように相互参照も機能します。
+
+## 表
+
+| 名前   | 単価 | 在庫 |
+|:-------|-----:|-----:|
+| Apple  | 100  | 50   |
+| Banana | 80   | 30   |
+
+: 価格表 {#tbl-price}
+
+## リスト
+
+1. 高速なコンパイル
+2. 平易なスクリプト言語
+3. LaTeX 不要
+
+# Typst 固有のオプション
+
+`format: typst` 配下で指定できる主な設定:
+
+| オプション           | 役割                               |
+|:---------------------|:-----------------------------------|
+| `papersize`          | 用紙サイズ（`a4`, `us-letter` など）|
+| `margin`             | 余白（`x` / `y` など）             |
+| `mainfont`           | 本文フォント（日本語フォントも可） |
+| `fontsize`           | 文字サイズ（例: `11pt`）           |
+| `section-numbering`  | 見出し採番形式（例: `"1.1.1"`）    |
+| `columns`            | 段組み数                           |
+
+# 生の Typst コードを埋め込む
+
+`{=typst}` ブロックで Typst のコードを直接書けます
+（LaTeX の `{=latex}` に相当）。Typst 出力のときだけ反映されます。
+
+```{=typst}
+#rect(fill: aqua, inset: 8pt)[これは Typst の #strong[rect] で描いた枠です。]
+```
+
+# LaTeX(PDF) との使い分け
+
+| 観点             | `format: pdf`(LaTeX)        | `format: typst`              |
+|:-----------------|:----------------------------|:-----------------------------|
+| 必要な外部環境   | TeX Live / TinyTeX          | 不要（Quarto に同梱）        |
+| コンパイル速度   | 遅め                        | 速い                         |
+| 日本語対応       | LuaLaTeX + フォント設定     | `mainfont` 指定で容易        |
+| 既存資産・成熟度 | 非常に豊富                  | 発展途上だが急成長中         |
+| 細かな組版制御   | 円熟（マクロ・パッケージ）  | Typst スクリプトで対応       |
+
+::: {.callout-tip}
+手早く PDF が欲しい・TeX を入れたくない場合は Typst、既存の LaTeX 資産や
+厳密な組版が必要な場合は `format: pdf` を選ぶとよいです。
+:::
